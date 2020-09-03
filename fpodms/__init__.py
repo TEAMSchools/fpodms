@@ -36,7 +36,7 @@ class FPODMS:
         login_path = "/api/account/login"
         login_payload = {"emailAddress": email_address, "password": password}
         login_response = self._request(
-            method="POST", path=login_path, content_type='json', data=login_payload
+            method="POST", path=login_path, content_type="json", data=login_payload
         )
 
         session_data = _SessionData(**login_response)
@@ -53,9 +53,10 @@ class FPODMS:
         try:
             response = self.session.request(method, url, params=params, json=data)
             response.raise_for_status()
-            if content_type == 'json':
+            if content_type == "json":
                 return response.json().get("data")
             else:
                 return response
         except HTTP_ERROR as e:
             print(e)
+            raise e

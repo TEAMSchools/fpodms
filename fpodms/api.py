@@ -9,7 +9,7 @@ class API:
         path = f"/api/year/getall"
         querystring = {"isNorthHemisphere": is_north_hemisphere}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
 
     def school_by_district(self, district_id=None, school_year_id=None):
@@ -21,7 +21,7 @@ class API:
         path = f"/api/school/GetByDistrict/{district_id}"
         querystring = {"schoolYearId": school_year_id}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
 
     def basclass_by_school(self, school_id, school_year_id=None):
@@ -31,7 +31,7 @@ class API:
         path = f"/api/class/GetBySchool/{school_id}"
         querystring = {"schoolYearId": school_year_id}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
 
     def students_by_school_and_school_year(self, school_id, school_year_id=None):
@@ -41,23 +41,23 @@ class API:
         path = f"/api/school/GetStudentsBySchoolAndSchoolYear"
         querystring = {"schoolId": school_id, "schoolYear": school_year_id,}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
 
     def grade_by_school(self, school_id, in_use_only=True):
         path = f"/api/grade/GetBySchool/{school_id}"
         querystring = {"inUseOnly": in_use_only}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
 
     def student_school_years_and_classes(self, student_id):
         path = f"/api/student/GetStudentSchoolYearsAndClasses"
         querystring = {"studentId": student_id}
         return self._client._request(
-            method="GET", path=path, content_type='json', params=querystring
+            method="GET", path=path, content_type="json", params=querystring
         )
-        
+
     def add_student(self, **kwargs):
         path = f"/api/student/AddStudent"
         payload = dict(

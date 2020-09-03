@@ -1,4 +1,4 @@
-import dateutil
+from dateutil import parser
 import re
 
 
@@ -16,7 +16,7 @@ class ExportFile:
 
     @staticmethod
     def parse_filedate(date):
-        date_parsed = dateutil.parser.parse(date)
+        date_parsed = parser.parse(date)
         return date_parsed.isoformat()
 
     @staticmethod
