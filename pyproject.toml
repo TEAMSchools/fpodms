@@ -5,13 +5,14 @@ description = ""
 authors = ["Charlie Bini <cbini87@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.2"
 requests = "^2.24.0"
 inflection = "^0.5.1"
 python-dateutil = "^2.8.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.2"
+black = "^21.9b0"
 
 [build-system]
 requires = ["poetry>=0.12"]
