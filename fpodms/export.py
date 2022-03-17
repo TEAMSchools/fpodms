@@ -1,10 +1,13 @@
-from dateutil import parser
 import re
+
+from dateutil import parser
 
 
 class ExportFile:
     def __init__(self, http_response):
-        self.filename = self.parse_filename(http_response.headers["Content-Disposition"])
+        self.filename = self.parse_filename(
+            http_response.headers["Content-Disposition"]
+        )
         self.filedate = self.parse_filedate(http_response.headers["Date"])
         self.data = self.clean_data(http_response.text)
 
@@ -52,7 +55,9 @@ class Export:
         if year is None:
             year = self._client.preferences.year
         return self.export(
-            endpoint="FPCAssessmentsByDistrictAndYear", year=year, district_id=district_id
+            endpoint="FPCAssessmentsByDistrictAndYear",
+            year=year,
+            district_id=district_id,
         )
 
     def assessments_by_district_and_year(self, year=None, district_id=None):
@@ -70,5 +75,7 @@ class Export:
         if year is None:
             year = self._client.preferences.year
         return self.export(
-            endpoint="InterventionRecordsByDistrictAndYear", year=year, district_id=district_id
+            endpoint="InterventionRecordsByDistrictAndYear",
+            year=year,
+            district_id=district_id,
         )

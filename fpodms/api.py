@@ -6,7 +6,7 @@ class API:
         if is_north_hemisphere is None:
             is_north_hemisphere = self._client.user.is_northern_hemisphere
 
-        path = f"/api/year/getall"
+        path = "/api/year/getall"
         querystring = {"isNorthHemisphere": is_north_hemisphere}
         return self._client._request(
             method="GET", path=path, content_type="json", params=querystring
@@ -38,8 +38,11 @@ class API:
         if school_year_id is None:
             school_year_id = self._client.preferences.year
 
-        path = f"/api/school/GetStudentsBySchoolAndSchoolYear"
-        querystring = {"schoolId": school_id, "schoolYear": school_year_id,}
+        path = "/api/school/GetStudentsBySchoolAndSchoolYear"
+        querystring = {
+            "schoolId": school_id,
+            "schoolYear": school_year_id,
+        }
         return self._client._request(
             method="GET", path=path, content_type="json", params=querystring
         )
@@ -52,14 +55,14 @@ class API:
         )
 
     def student_school_years_and_classes(self, student_id):
-        path = f"/api/student/GetStudentSchoolYearsAndClasses"
+        path = "/api/student/GetStudentSchoolYearsAndClasses"
         querystring = {"studentId": student_id}
         return self._client._request(
             method="GET", path=path, content_type="json", params=querystring
         )
 
     def add_student(self, **kwargs):
-        path = f"/api/student/AddStudent"
+        path = "/api/student/AddStudent"
         payload = dict(
             student=dict(
                 firstName=kwargs.get("firstName"),
@@ -82,7 +85,7 @@ class API:
         )
 
     def add_student_to_school_and_grade_and_maybe_class(self, **kwargs):
-        path = f"/api/student/AddStudentToSchoolAndGradeAndMaybeClass"
+        path = "/api/student/AddStudentToSchoolAndGradeAndMaybeClass"
         payload = dict(
             studentId=kwargs.get("studentId"),
             schoolYearId=kwargs.get("schoolYearId"),

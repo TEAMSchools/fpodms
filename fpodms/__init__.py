@@ -1,10 +1,9 @@
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
-import requests
 import inflection
+import requests
 
-from . import api
-from . import export
+from . import api, export
 
 HTTP_ERROR = requests.exceptions.HTTPError
 

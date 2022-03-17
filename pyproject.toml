@@ -1,19 +1,30 @@
-[tool.poetry]
+[project]
 name = "fpodms"
 version = "0.1.1"
 description = ""
-authors = ["Charlie Bini <cbini87@gmail.com>"]
+authors = [
+    {name = "Charlie Bini", email = "5003326+cbini@users.noreply.github.com"},
+]
+license-expression = "MIT"
+dependencies = [
+    "requests>=2.27.1",
+    "inflection>=0.5.1",
+]
+requires-python = ">=3.9"
 
-[tool.poetry.dependencies]
-python = "^3.6.2"
-requests = "^2.24.0"
-inflection = "^0.5.1"
-python-dateutil = "^2.8.1"
+[project.urls]
+Homepage = ""
 
-[tool.poetry.dev-dependencies]
-pytest = "^6.2"
-black = "^21.9b0"
+[project.optional-dependencies]
+[tool]
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.1.0",
+    "black>=22.1.0",
+    "flake8>=4.0.1",
+]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["pdm-pep517>=0.12.0"]
+build-backend = "pdm.pep517.api"
