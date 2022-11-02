@@ -1,11 +1,10 @@
-__version__ = "0.1.1"
+import hashlib
 
 import inflection
 import requests
 
-from . import api, export
-
-HTTP_ERROR = requests.exceptions.HTTPError
+from fpodms.api import API
+from fpodms.export import Export
 
 
 class _SessionData:
@@ -21,7 +20,7 @@ class _SessionData:
                 self.__dict__[k] = v
 
 
-class FPODMS:
+class Client:
     """An F&P ODMS session.
 
     :param email_address: A string, a valid login email address.
@@ -32,30 +31,36 @@ class FPODMS:
         self.base_url = "https://fpdms.heinemann.com"
         self.session = requests.session()
 
-        login_path = "/api/account/login"
-        login_payload = {"emailAddress": email_address, "password": password}
         login_response = self._request(
-            method="POST", path=login_path, content_type="json", data=login_payload
+            method="POST",
+            path="api/account/login",
+            data={
+                "emailAddress": email_address,
+                "password": hashlib.md5(password.encode()).hexdigest(),
+            },
         )
 
-        session_data = _SessionData(**login_response)
-        self.preferences = session_data.preferences
-        self.session_timeout_minutes = session_data.session_timeout_minutes
-        self.state = session_data.state
-        self.user = session_data.user
+        if login_response["state"] == "Failed":
+            raise requests.exceptions.HTTPError(login_response)
+        else:
+            session_data = _SessionData(**login_response)
 
-        self.api = api.API(self)
-        self.export = export.Export(self)
+            self.preferences = session_data.preferences
+            self.session_timeout_minutes = session_data.session_timeout_minutes
+            self.state = session_data.state
+            self.user = session_data.user
+            self.api = API(self)
+            self.export = Export(self)
 
-    def _request(self, method, path, content_type, params={}, data={}):
-        url = f"{self.base_url}{path}"
+    def _request(self, method, path, content_type="json", params={}, data={}):
         try:
-            response = self.session.request(method, url, params=params, json=data)
+            response = self.session.request(
+                method=method, url=f"{self.base_url}/{path}", params=params, json=data
+            )
             response.raise_for_status()
             if content_type == "json":
-                return response.json().get("data")
+                return response.json()["data"]
             else:
                 return response
-        except HTTP_ERROR as e:
-            print(e)
-            raise e
+        except requests.exceptions.HTTPError as e:
+            raise requests.exceptions.HTTPError from e

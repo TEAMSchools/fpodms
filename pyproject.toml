@@ -1,6 +1,6 @@
 [project]
 name = "fpodms"
-version = "0.1.2"
+version = "2.0.0"
 description = ""
 authors = [
   { name = "Charlie Bini", email = "5003326+cbini@users.noreply.github.com" },
@@ -13,6 +13,7 @@ dependencies = [
 requires-python = ">=3.9"
 readme = "README.md"
 license = { text = "MIT" }
+[project.optional-dependencies]
 
 [tool]
 [tool.pdm]

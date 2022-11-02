@@ -42,18 +42,21 @@ class Export:
         ]
 
     def export(self, endpoint, year, district_id):
-        path = f"/export/{endpoint}/{district_id}"
-        querystring = {"year": year}
         export_response = self._client._request(
-            method="GET", path=path, content_type="", params=querystring
+            method="GET",
+            path=f"export/{endpoint}/{district_id}",
+            params={"year": year},
+            content_type=None,
         )
         return ExportFile(export_response)
 
     def fpc_assessments_by_district_and_year(self, year=None, district_id=None):
         if district_id is None:
             district_id = self._client.preferences.district_id
+
         if year is None:
             year = self._client.preferences.year
+
         return self.export(
             endpoint="FPCAssessmentsByDistrictAndYear",
             year=year,
@@ -63,8 +66,10 @@ class Export:
     def assessments_by_district_and_year(self, year=None, district_id=None):
         if district_id is None:
             district_id = self._client.preferences.district_id
+
         if year is None:
             year = self._client.preferences.year
+
         return self.export(
             endpoint="AssessmentsByDistrictAndYear", year=year, district_id=district_id
         )
@@ -72,8 +77,10 @@ class Export:
     def intervention_records_by_district_and_year(self, year=None, district_id=None):
         if district_id is None:
             district_id = self._client.preferences.district_id
+
         if year is None:
             year = self._client.preferences.year
+
         return self.export(
             endpoint="InterventionRecordsByDistrictAndYear",
             year=year,
