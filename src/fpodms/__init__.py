@@ -56,6 +56,7 @@ class Client:
                 method=method, url=f"{self.base_url}/{path}", params=params, json=data
             )
             response.raise_for_status()
+
             if content_type == "json":
                 return response.json()["data"]
             else:
