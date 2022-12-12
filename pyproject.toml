@@ -21,7 +21,7 @@ build-backend = "pdm.pep517.api"
 
 [tool.pdm.build]
 package-dir = "src"
-includes = ["src/fpodms-new/*"]
+includes = ["src/fpodms/*"]
 
 [tool.pdm.dev-dependencies]
 dev = ["pytest"]
