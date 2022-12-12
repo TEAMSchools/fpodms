@@ -1,5 +1,3 @@
-import hashlib
-
 import inflection
 import requests
 
@@ -36,7 +34,7 @@ class Client:
             path="api/account/login",
             data={
                 "emailAddress": email_address,
-                "password": hashlib.md5(password.encode()).hexdigest(),
+                "password": password,
             },
         )
 
