@@ -1,6 +1,6 @@
 [project]
 name = "fpodms"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = [
   { name = "Charlie Bini", email = "5003326+cbini@users.noreply.github.com" },
