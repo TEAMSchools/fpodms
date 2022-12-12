@@ -9,11 +9,11 @@ plugins:
 lint:
   enabled:
     - actionlint@1.6.22
-    - black@22.10.0
+    - black@22.12.0
     - flake8@6.0.0
     - git-diff-check
     - gitleaks@8.15.2
-    - isort@5.10.1
+    - isort@5.11.0
     - markdownlint@0.32.2
     - prettier@2.8.1
     - shellcheck@0.8.0
