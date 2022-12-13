@@ -119,3 +119,24 @@ class API:
                 },
             },
         )
+
+    def move_students(
+        self,
+        source_school_id,
+        destination_school_id,
+        *args,
+        **kwargs,
+    ):
+        return self._client._request(
+            method="POST",
+            path="api/student/MoveStudents",
+            params={
+                "sourceSchoolId": source_school_id,
+                "destinationSchoolId": destination_school_id,
+                "sourceSchoolYearId": kwargs.get("source_school_year_id")
+                or self._client.preferences.year,
+                "destinationSchoolYearId": kwargs.get("destination_school_year_id")
+                or self._client.preferences.year,
+            },
+            data=args,
+        )
