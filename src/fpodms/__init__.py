@@ -38,10 +38,12 @@ class Client:
             },
         )
 
-        if login_response["state"] == "Failed":
+        login_response_data = login_response["data"]
+
+        if login_response_data["state"] == "Failed":
             raise requests.exceptions.HTTPError(login_response)
         else:
-            session_data = _SessionData(**login_response)
+            session_data = _SessionData(**login_response_data)
 
             self.preferences = session_data.preferences
             self.session_timeout_minutes = session_data.session_timeout_minutes

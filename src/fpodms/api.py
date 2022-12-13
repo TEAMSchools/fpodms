@@ -10,7 +10,7 @@ class API:
             method="GET",
             path="api/year/getall",
             params={"isNorthHemisphere": is_north_hemisphere},
-        )
+        )["data"]
 
     def school_by_district(self, district_id=None, school_year_id=None):
         if district_id is None:
@@ -22,7 +22,7 @@ class API:
             method="GET",
             path=f"api/school/GetByDistrict/{district_id}",
             params={"schoolYearId": school_year_id},
-        )
+        )["data"]
 
     def basclass_by_school(self, school_id, school_year_id=None):
         if school_year_id is None:
@@ -32,7 +32,7 @@ class API:
             method="GET",
             path=f"api/class/GetBySchool/{school_id}",
             params={"schoolYearId": school_year_id},
-        )
+        )["data"]
 
     def students_by_school_and_school_year(self, school_id, school_year_id=None):
         if school_year_id is None:
@@ -45,21 +45,21 @@ class API:
                 "schoolId": school_id,
                 "schoolYear": school_year_id,
             },
-        )
+        )["data"]
 
     def grade_by_school(self, school_id, in_use_only=True):
         return self._client._request(
             method="GET",
             path=f"api/grade/GetBySchool/{school_id}",
             params={"inUseOnly": in_use_only},
-        )
+        )["data"]
 
     def student_school_years_and_classes(self, student_id):
         return self._client._request(
             method="GET",
             path="api/student/GetStudentSchoolYearsAndClasses",
             params={"studentId": student_id},
-        )
+        )["data"]
 
     def add_student(self, **kwargs):
         return self._client._request(
@@ -82,7 +82,7 @@ class API:
                     "groupId": kwargs.get("groupId"),
                 },
             },
-        )
+        )["data"]
 
     def add_student_to_school_and_grade_and_maybe_class(self, **kwargs):
         return self._client._request(
@@ -118,7 +118,7 @@ class API:
                     "holidays": kwargs.get("holidays", []),
                 },
             },
-        )
+        )["data"]
 
     def move_students(
         self,
