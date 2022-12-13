@@ -50,15 +50,16 @@ class Client:
             self.api = API(self)
             self.export = Export(self)
 
-    def _request(self, method, path, content_type="json", params={}, data={}):
+    def _request(self, method, path, params={}, data={}):
         try:
             response = self.session.request(
                 method=method, url=f"{self.base_url}/{path}", params=params, json=data
             )
+
             response.raise_for_status()
 
-            if content_type == "json":
-                return response.json()["data"]
+            if "application/json" in response.headers["content-type"]:
+                return response.json()
             else:
                 return response
         except requests.exceptions.HTTPError as e:

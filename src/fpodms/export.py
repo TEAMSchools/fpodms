@@ -46,7 +46,6 @@ class Export:
             method="GET",
             path=f"export/{endpoint}/{district_id}",
             params={"year": year},
-            content_type=None,
         )
         return ExportFile(export_response)
 

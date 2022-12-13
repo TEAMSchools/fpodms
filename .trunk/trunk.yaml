@@ -4,7 +4,7 @@ cli:
 plugins:
   sources:
     - id: trunk
-      ref: v0.0.6
+      ref: v0.0.7
       uri: https://github.com/trunk-io/plugins
 lint:
   enabled:
@@ -13,7 +13,7 @@ lint:
     - flake8@6.0.0
     - git-diff-check
     - gitleaks@8.15.2
-    - isort@5.11.1
+    - isort@5.11.2
     - markdownlint@0.32.2
     - prettier@2.8.1
     - shellcheck@0.9.0
